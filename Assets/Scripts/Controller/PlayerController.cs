@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
+using Controller.Cam;
 using UnityEngine;
 using World.Actors;
 using World.Navigation;
-using static Controller.Cameras.CameraController;
+using static Controller.Cam.CameraController;
 namespace Controller
 {
     [RequireComponent(typeof(Player))]
@@ -14,8 +15,8 @@ namespace Controller
         private float speed = 1f;
         public float Speed => speed*Time.deltaTime;
 
-        [SerializeField] private Cameras.CameraController cameraController;
-        public Cameras.CameraController CameraController => cameraController;
+        [SerializeField] private CameraController cameraController;
+        public CameraController CameraController => cameraController;
 
         private Player Player { get; set; }
         private Interactor Interactor { get; set; }
@@ -26,14 +27,13 @@ namespace Controller
             Interactor = GetComponent<Interactor>();
             CameraController
                 .AddSyncBefore(CameraController.FollowTransition(transform))
-                .AddSyncBefore(CameraController.
-                    SmoothGoToTransition(new Vector2(-1,-10) ,Single.MaxValue));
-              
+                .AddAsyncAfter(CameraController.ShakeScreenTransition(1f, 10f))
+                .AddAsyncAfter(WaitAndFade());
         }
 
         private IEnumerator WaitAndFade()
         {
-            return CombineSync(CameraController.WaitTransition(10),
+            return CombineSync(CameraController.WaitTransition(3),
                 CameraController.FadeScreenTransition(3));
         }
 

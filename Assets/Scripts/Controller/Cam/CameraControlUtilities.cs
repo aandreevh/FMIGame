@@ -1,31 +1,30 @@
 using System.Collections;
-using System.Collections.Generic;
 
-namespace Controller.Cameras
+namespace Controller.Cam
 {
     using Transition  = IEnumerator;
     public partial class CameraController
     {
        
-        public CameraController AddAsyncBefore(Transition transition)
+        public Cam.CameraController AddAsyncBefore(Transition transition)
         {
             TransitionStack = CombineAsync(transition, TransitionStack);
             return this;
         }
 
-        public CameraController AddAsyncAfter(Transition transition)
+        public Cam.CameraController AddAsyncAfter(Transition transition)
         {
             TransitionStack = CombineAsync(TransitionStack, transition);
             return this;
         }
 
-        public CameraController AddSyncBefore(Transition transition)
+        public Cam.CameraController AddSyncBefore(Transition transition)
         {
             TransitionStack = CombineSync(transition, TransitionStack);
             return this;
         }
 
-        public CameraController AddSyncAfter(Transition transition)
+        public Cam.CameraController AddSyncAfter(Transition transition)
         {
             TransitionStack = CombineSync(TransitionStack, transition);
             return this;

@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
-namespace Controller.Cameras
+namespace Controller.Cam
 {
     using Transition = IEnumerator;
 
@@ -23,10 +24,10 @@ namespace Controller.Cameras
         {
             condition = condition ?? (() => { return true; });
 
-            var transform = Camera.transform;
+            var transformComponent = transform;
             while (condition())
             {
-                transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
+                transformComponent.position = new Vector3(target.position.x, target.position.y, transform.position.z);
                 yield return null;
             }
         }
@@ -118,6 +119,28 @@ namespace Controller.Cameras
                     transformComponent.position.z);
                 yield return null;
             }   
+        }
+
+        public Transition ShakeScreenTransition(float amount,float time,bool autoRevert=false)
+        {
+            var lastTransition = Vector3.zero;
+            var cameraTansform = Camera.transform;
+            
+            while (true)
+            {
+                time -= Time.deltaTime;
+                
+                var position = cameraTansform.position;
+                if(autoRevert) position -= lastTransition;
+                
+                lastTransition = (Vector3) UnityEngine.Random.insideUnitCircle * amount;
+                
+                position += lastTransition;
+                cameraTansform.position = position;
+                if (time <= 0) yield break;
+                
+                yield return null;
+            }
         }
 
         public void Reset()

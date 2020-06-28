@@ -14,7 +14,7 @@ namespace World.Actors
     public class Player : Actor
     {
    
-        [Header("Character")]
+        [Header("Player")]
         [SerializeField]
         private Direction.Type lookingDirection;
 
