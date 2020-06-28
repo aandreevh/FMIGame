@@ -7,9 +7,9 @@ namespace World.Actors
 {
     public class Interactor : MonoBehaviour
     {
-        [Header("Interaction")] [SerializeField]
-        private float radius;
-
+        [Header("Interaction")] 
+        [SerializeField] private float radius;
+        public float Radius => radius;
         [SerializeField]private float interactTimeout = 1f;
         public float InteractionTime => interactTimeout;
         
@@ -22,8 +22,6 @@ namespace World.Actors
         }
 
         [SerializeField] private Vector3 offset;
-
-        public float Radius => radius;
         public Vector3 Center => transform.position + offset;
 
         private void Start()

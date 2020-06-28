@@ -1,12 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Item")]
-public class Item : ScriptableObject
+namespace Items
 {
-    public string itemName;
-    public int itemAmount;
+    [CreateAssetMenu(fileName = "NewItem", menuName = "Item")]
+    public class Item : ScriptableObject
+    {
+        [SerializeField]
+        private Sprite image;
 
-    public Sprite artwork;
+        [SerializeField] private string itemName;
+
+        public Sprite Image => image;
+        public string Name => itemName;
+    }
 }

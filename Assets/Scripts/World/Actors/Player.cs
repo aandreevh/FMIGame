@@ -1,13 +1,17 @@
-﻿using Signals.Emitters;
+﻿using System.Runtime.CompilerServices;
+using Controller;
+using Items;
+using Signals.Emitters;
 using UnityEngine;
 using World.Actors;
 using World.Navigation;
 
 namespace World.Actors
 {
-    
-    [RequireComponent(typeof(Interactor))]
-    public class Character : Actor
+    [RequireComponent(typeof(Interactor),
+        typeof(ItemPicker),
+    typeof(PlayerController))]
+    public class Player : Actor
     {
    
         [Header("Character")]
@@ -20,7 +24,7 @@ namespace World.Actors
         public Direction.Type LookingDirection
         {
             get => lookingDirection;
-            set => lookingDirection = value;
+            private set => lookingDirection = value;
         }
         
         public Interactor Interactor { get; private set; }

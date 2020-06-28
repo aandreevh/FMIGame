@@ -1,25 +1,40 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using World.Actors;
 using World.Navigation;
-
+using static Controller.Cameras.CameraController;
 namespace Controller
 {
-    [RequireComponent(typeof(Character))]
+    [RequireComponent(typeof(Player))]
     public class PlayerController : MonoBehaviour
     {
         
         [SerializeField]
         private float speed = 1f;
         public float Speed => speed*Time.deltaTime;
-        
-        private Character Character { get; set; }
+
+        [SerializeField] private Cameras.CameraController cameraController;
+        public Cameras.CameraController CameraController => cameraController;
+
+        private Player Player { get; set; }
         private Interactor Interactor { get; set; }
 
         private void Awake()
         {
-            Character = GetComponent<Character>();
+            Player = GetComponent<Player>();
             Interactor = GetComponent<Interactor>();
+            CameraController
+                .AddSyncBefore(CameraController.FollowTransition(transform))
+                .AddSyncBefore(CameraController.
+                    SmoothGoToTransition(new Vector2(-1,-10) ,Single.MaxValue));
+              
+        }
+
+        private IEnumerator WaitAndFade()
+        {
+            return CombineSync(CameraController.WaitTransition(10),
+                CameraController.FadeScreenTransition(3));
         }
 
         private void FixedUpdate()
@@ -48,12 +63,12 @@ namespace Controller
 
         private void InteractControl()
         {
-           Character.Interact();
+            Player.Interact();
         }
 
         private void MoveControl(Direction.Type direction)
         {
-            Character.Walk(direction,Speed);
+            Player.Walk(direction,Speed);
         }
     }
 }
