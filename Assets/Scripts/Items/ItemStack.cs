@@ -15,7 +15,7 @@ namespace Items
         private void Awake()
         {
             Renderer = GetComponent<SpriteRenderer>();
-            Renderer.sprite = Item.Image;
+            OnValidate();
         }
 
         private void OnValidate()

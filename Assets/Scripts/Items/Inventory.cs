@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Items
 {
-    using ItemBag = HashSet<Item>;
+    using ItemBag = List<Item>;
     public class Inventory : MonoBehaviour
     {
         [SerializeField] private ItemBag items = new ItemBag();

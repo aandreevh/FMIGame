@@ -5,7 +5,7 @@ using World.Objects;
 
 namespace AnimatorController
 {
-    public class CharacterAnimationController : StateMachineBehaviour
+    public class PlayerAnimationController : StateMachineBehaviour
     {
         public  const string HorizontalParam = "horizontal";
         public  const string VerticalParam = "vertical";

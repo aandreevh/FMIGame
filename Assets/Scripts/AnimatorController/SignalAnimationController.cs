@@ -17,9 +17,10 @@ namespace AnimatorController
         }
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        {
+        {  
             if (Signal)
             {
+             
                 animator.SetBool(Triggered, Signal.Signaled);
             }
         }
