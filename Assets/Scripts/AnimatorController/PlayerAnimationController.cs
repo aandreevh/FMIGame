@@ -31,7 +31,7 @@ namespace AnimatorController
 
         private Vector2 GetDirectionNormal()
         {
-            return Direction.NormalFromDirection(Player.LookingDirection);
+            return Player.LookingDirection.Normal();
         }
 
     }

@@ -20,6 +20,9 @@ namespace Controller
         [SerializeField] private CameraController cameraController;
         public CameraController CameraController => cameraController;
 
+        [SerializeField] private Transform lighting;
+        public Transform Lighting => lighting;
+
         private Player Player { get; set; }
         private Interactor Interactor { get; set; }
 
@@ -50,15 +53,24 @@ namespace Controller
         private void HandleInput()
         {
             HandleWalk();
+            HandeLighting();
             HandleInteraction();
+        }
+
+        private void HandeLighting()
+        {
+           var diff=  CameraController.Camera.ScreenToWorldPoint(Input.mousePosition) - Lighting.position;
+          
+           float rot = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg-90;
+           Lighting.rotation = Quaternion.Euler(Vector3.forward * rot);
         }
 
         private void HandleWalk()
         {
-            if(Input.GetKey(KeyCode.W)) MoveControl(Direction.Type.Up);
-            else if(Input.GetKey(KeyCode.S))MoveControl(Direction.Type.Down);
-            else if(Input.GetKey(KeyCode.A))MoveControl(Direction.Type.Left);
-            else if(Input.GetKey(KeyCode.D))MoveControl(Direction.Type.Right);
+            if(Input.GetKey(KeyCode.W)) MoveControl(Direction.Up);
+            else if(Input.GetKey(KeyCode.S))MoveControl(Direction.Down);
+            else if(Input.GetKey(KeyCode.A))MoveControl(Direction.Left);
+            else if(Input.GetKey(KeyCode.D))MoveControl(Direction.Right);
         }
 
         private void HandleInteraction()
@@ -71,9 +83,10 @@ namespace Controller
             Player.Interact();
         }
 
-        private void MoveControl(Direction.Type direction)
+        private void MoveControl(Direction direction)
         {
             Player.Walk(direction,Speed);
         }
+        
     }
 }

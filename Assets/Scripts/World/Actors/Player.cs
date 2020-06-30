@@ -16,12 +16,12 @@ namespace World.Actors
    
         [Header("Player")]
         [SerializeField]
-        private Direction.Type lookingDirection;
+        private Direction lookingDirection;
 
         public bool HasWalked { get; private set; }
         private bool walked = false;
        
-        public Direction.Type LookingDirection
+        public Direction LookingDirection
         {
             get => lookingDirection;
             private set => lookingDirection = value;
@@ -35,16 +35,16 @@ namespace World.Actors
             Interactor = GetComponent<Interactor>();
         }
 
-        public void Walk(Direction.Type direction, float amount)
+        public void Walk(Direction direction, float amount)
         {
             LookingDirection = direction;
             walked = true;
-            Move(amount* Direction.NormalFromDirection(direction));
+            Move(amount* direction.Normal());
         }
 
         public void Interact()
         {
-            Interactor.Interact(Direction.NormalFromDirection(LookingDirection));
+            Interactor.Interact(LookingDirection.Normal());
         }
 
         protected override void UpdateMotion()

@@ -1,7 +1,6 @@
 using UnityEngine;
 using World.Actors;
 using World.Objects;
-using World.Traverse;
 
 namespace World.Navigation
 {

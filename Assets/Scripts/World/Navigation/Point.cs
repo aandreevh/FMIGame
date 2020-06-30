@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace World.Traverse
+namespace World.Navigation
 {
     public class Point : MonoBehaviour
     {
