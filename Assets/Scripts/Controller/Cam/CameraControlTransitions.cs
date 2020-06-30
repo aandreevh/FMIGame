@@ -23,7 +23,7 @@ namespace Controller.Cam
         public Transition FollowTransition(Transform target, Func<bool> condition = null)
         {
             condition = condition ?? (() => { return true; });
-
+           
             var transformComponent = transform;
             while (condition())
             {

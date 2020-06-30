@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,61 +6,20 @@ namespace Signals.Emitters
 {
     public class InteractSignal : Signal
     {
-        [SerializeField] private bool hasInteractTimeout;
-        [SerializeField] private float interactTimeout;
-        public float InteractTimeout => interactTimeout;
-        [SerializeField,HideInInspector]
-        private float timeout = 0;
-
-        public float Timeout
-        {
-            get => timeout;
-            private set=> timeout = value;
-        }
-
-        public bool HasInteractTimeout => hasInteractTimeout;
-
+        public event Action<GameObject> OnFailed;
         public void Interact(GameObject obj)
         {
-            if(MeetsRequirements(obj)) UpdateSignal();
+            if (MeetsRequirements(obj)) ChangeSignal(!Signaled);
+            else OnFailed?.Invoke(obj);
         }
+        
 
-        protected virtual bool MeetsRequirements(GameObject _) {return true;}
-
-        private void UpdateSignal()
+        protected virtual bool MeetsRequirements(GameObject _)
         {
-            if (HasInteractTimeout)
-            {
-                if (!Signaled)
-                {
-                    ChangeSignal(true);
-                    StartCoroutine(nameof(SignalCoroutine));  
-                }
-            }
-            else
-            {
-                ChangeSignal(!Signaled);
-            }
-       
+            return true;
         }
 
-        private IEnumerator SignalCoroutine()
-        {
-            Timeout = InteractTimeout;
-            
-            while (Signaled)
-            {
-                Timeout -= Time.deltaTime;
-                if (Timeout <= 0)
-                {
-                    ChangeSignal(false);
-                    yield break;
-                }
 
-                yield return null;
-            }
 
-            yield return null;
-        }
     }
 }

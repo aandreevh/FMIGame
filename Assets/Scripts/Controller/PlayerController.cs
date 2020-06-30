@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Controller.Cam;
+using UnityEditor;
 using UnityEngine;
 using World.Actors;
 using World.Navigation;
@@ -25,10 +27,13 @@ namespace Controller
         {
             Player = GetComponent<Player>();
             Interactor = GetComponent<Interactor>();
+        }
+
+        private void Start()
+        {
+            
             CameraController
-                .AddSyncBefore(CameraController.FollowTransition(transform))
-                .AddAsyncAfter(CameraController.ShakeScreenTransition(1f, 10f))
-                .AddAsyncAfter(WaitAndFade());
+                .AddSyncBefore(CameraController.FollowTransition(transform));
         }
 
         private IEnumerator WaitAndFade()
