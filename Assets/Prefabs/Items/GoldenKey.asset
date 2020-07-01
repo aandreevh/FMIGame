@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: GoldenKey
   m_EditorClassIdentifier: 
   image: {fileID: -1611936281182024222, guid: c51b4e45b26868a618e1c8fd33bb9846, type: 3}
+  rarity: 2
   itemName: Golden Key
