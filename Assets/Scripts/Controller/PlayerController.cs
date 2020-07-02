@@ -34,15 +34,15 @@ namespace Controller
 
         private void Start()
         {
-            
+
             CameraController
                 .AddSyncBefore(CameraController.FollowTransition(transform));
         }
 
         private IEnumerator WaitAndFade()
         {
-            return CombineSync(CameraController.WaitTransition(3),
-                CameraController.FadeScreenTransition(3));
+            return CombineSync(CameraController.WaitTransition(1),
+                CameraController.FadeScreenTransition(10));
         }
 
         private void FixedUpdate()
@@ -59,8 +59,9 @@ namespace Controller
 
         private void HandeLighting()
         {
-           var diff=  CameraController.Camera.ScreenToWorldPoint(Input.mousePosition) - Lighting.position;
-          
+            var mousePosition = Input.mousePosition;
+           var diff=  CameraController.Camera.ScreenToWorldPoint(mousePosition) - Lighting.position;
+           Debug.Log(CameraController.Camera.ScreenToWorldPoint(mousePosition));
            float rot = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg-90;
            Lighting.rotation = Quaternion.Euler(Vector3.forward * rot);
         }

@@ -70,7 +70,8 @@ namespace Controller.Cam
             fader.transform.parent = currentTransform;
 
             RawImage img = fader.AddComponent<RawImage>();
-            fader.AddComponent<Canvas>();
+            var canvas = fader.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceCamera;
 
             Texture2D texture = new Texture2D(1, 1);
 

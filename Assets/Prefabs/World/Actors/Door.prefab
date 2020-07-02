@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 6271709255341205548}
   - component: {fileID: 6271709255341205550}
   - component: {fileID: 6271709255341205549}
-  - component: {fileID: 6271709255341205537}
-  - component: {fileID: 6271709255341205538}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -118,30 +116,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signal: {fileID: 0}
---- !u!114 &6271709255341205537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6271709255341205551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32c7043f93ee485282b25cdb988c65c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signal: {fileID: 0}
---- !u!114 &6271709255341205538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6271709255341205551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0383b0d487a421c9196e7d843868be7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  signaled: 0
-  op: 2
