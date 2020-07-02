@@ -28,9 +28,10 @@ namespace World.Actors
 
         public Vector2 MoveToPosition(Vector2 pos, float speed)
         {
+            var distance = speed * Time.deltaTime;
             var deltaVec = pos-NextPosition;
-            if (deltaVec.magnitude > speed) {
-                deltaVec = speed*deltaVec.normalized ;
+            if (deltaVec.sqrMagnitude > distance) {
+                deltaVec = distance*deltaVec.normalized ;
             }
             Move(deltaVec);
             

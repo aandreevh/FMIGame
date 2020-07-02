@@ -39,9 +39,9 @@ namespace World.Navigation
         public Vector2 UpdateAgent()
         {
             if(!TargetPoint) return Vector2.zero;
-        
-            var actualMovement = Actor.MoveToPosition(TargetPoint.Position, Speed);
-            if (actualMovement.magnitude < float.Epsilon)
+            Actor.MoveToPosition(TargetPoint.Position, Speed);
+            var actualMovement = TargetPoint.Position - Actor.NextPosition;
+            if (actualMovement.sqrMagnitude < 0.01f)
             {
                 UpdateNextTargetPoint();
             }
