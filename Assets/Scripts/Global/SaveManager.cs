@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Global.Level;
 using UnityEngine;
 
-namespace UIController
+namespace Global
 {
     public static class SaveManager
     {

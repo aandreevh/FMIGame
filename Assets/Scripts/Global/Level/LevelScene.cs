@@ -1,8 +1,7 @@
-using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace UIController
+namespace Global.Level
 {
     [CreateAssetMenu(fileName = "LevelScene", menuName = "ScriptableObjects/LevelScene", order = 1)]
     public class LevelScene : ScriptableObject

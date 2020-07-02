@@ -1,7 +1,7 @@
-using Tracker;
+using UI;
 using UnityEngine;
 
-namespace UIController
+namespace Global.Level
 {
     public class EndLevelObject : MonoBehaviour
     {

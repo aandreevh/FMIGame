@@ -58,10 +58,10 @@ namespace Controller
         }
 
         private void HandeLighting()
-        {
+        { 
             var mousePosition = Input.mousePosition;
            var diff=  CameraController.Camera.ScreenToWorldPoint(mousePosition) - Lighting.position;
-           Debug.Log(CameraController.Camera.ScreenToWorldPoint(mousePosition));
+
            float rot = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg-90;
            Lighting.rotation = Quaternion.Euler(Vector3.forward * rot);
         }

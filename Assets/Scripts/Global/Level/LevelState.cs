@@ -1,6 +1,4 @@
-using System;
-
-namespace UIController
+namespace Global.Level
 {
     [System.Serializable]
     public class LevelState

@@ -1,17 +1,8 @@
+using Signals;
 using Signals.Receivers.Unary;
+using Signals.Transmitters.Unary;
 
 namespace World.Objects
 {
-    public class Door : UnaryReceiver
-    {
-        protected override void OnSignalAcquired()
-        {
-            base.OnSignalAcquired();
-        }
-
-        protected override void OnSignalLost()
-        {
-            base.OnSignalLost();
-        }
-    }
+    public class Door : UnaryTransmitter {}
 }

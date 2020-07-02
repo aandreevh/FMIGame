@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace UIController
+namespace Controller
 {
-    public class PlayerUIController : MonoBehaviour
+    public class UIController : MonoBehaviour
     {
         public GameObject pauseUI;
     

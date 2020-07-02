@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+using Global.Level;
 
-namespace UIController
+namespace Global
 {
     [Serializable]
     public class SaveData
@@ -15,7 +15,7 @@ namespace UIController
         {
             LevelStates = new List<LevelState>(new LevelState[levelScenes.Count]);
 
-            LevelStates[0] = new LevelState(levelScenes[0].Scene.name,true);
+            LevelStates[0] =new LevelState(levelScenes[0].Scene.name,true);
             
             for (int i = 1; i < levelScenes.Count; i++)
             {
