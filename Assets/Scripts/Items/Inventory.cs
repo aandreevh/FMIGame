@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,14 +11,23 @@ namespace Items
         
         public ItemBag Items => items;
 
+        public event Action OnInvetoryChanged;
+
         public bool RemoveItem(Item item)
         {
-            return  Items.Remove(item);
+            var removed = Items.Remove(item);
+            if (removed)
+            {
+                OnInvetoryChanged?.Invoke();
+            }
+
+            return removed;
         }
 
         public void AddItem(Item item)
         {
-            Items.Add(item);
+           if(!Items.Contains(item)) Items.Add(item);
+            OnInvetoryChanged?.Invoke();
         }
 
         public bool HasItem(Item item)
@@ -34,7 +44,5 @@ namespace Items
 
             return true;
         }
-        
-    
     }
 }

@@ -21,13 +21,22 @@ namespace World.Objects
         [SerializeField] private GameObject endMenu;
         private GameObject EndMenu => endMenu;
 
+        protected override void OnSignalAcquired()
+        {
+            if (Tracker.Colliders.Count > 0) StopGame();
+        }
+
+        protected override void OnSignalLost()
+        {
+        }
+
         private void Awake()
         {
             Tracker = GetComponent<CollisionTracker>();
             Tracker.OnColliderEnter += StopGame;
         }
 
-        private void StopGame(Collider2D _)
+        private void StopGame(Collider2D _ = null)
         {
             if (Signal.Signaled)
             {
