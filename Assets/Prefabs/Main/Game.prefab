@@ -161,7 +161,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -464,6 +464,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: LEVEL END
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657238467561211073, guid: 3f1dc499bf1a8c26483edb19e94d1a1f,
+        type: 3}
+      propertyPath: m_margin.z
+      value: 142.83408
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657238467561211073, guid: 3f1dc499bf1a8c26483edb19e94d1a1f,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657238467561211074, guid: 3f1dc499bf1a8c26483edb19e94d1a1f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5657238467561211074, guid: 3f1dc499bf1a8c26483edb19e94d1a1f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 350.40002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f1dc499bf1a8c26483edb19e94d1a1f, type: 3}

@@ -25,7 +25,7 @@ namespace Signals.Emitters
         private IEnumerator TimeUpdate()
         {
             bool lastState = Signaled;
-            SetTimeout();
+            
             
             while (true)
             {
