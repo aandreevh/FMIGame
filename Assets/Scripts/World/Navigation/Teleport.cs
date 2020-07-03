@@ -31,7 +31,7 @@ namespace World.Navigation
 
         private void TeleportCollider(Collider2D other)
         {
-            if (TeleportEnabled)
+            if (TeleportEnabled && location)
             {
                 var entity = other.transform;
                 entity.position = TeleportLocation;
