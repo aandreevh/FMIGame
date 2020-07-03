@@ -7,7 +7,7 @@ namespace Popup
 {
     public class TextPopup : MonoBehaviour
     {
-        [SerializeField] private string text;
+        [SerializeField] [TextArea]private string text;
 
         public string Text
         {

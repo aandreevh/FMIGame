@@ -7,7 +7,7 @@ namespace World.Objects
 {
     public class Sign : ShowedPopup
     {
-        [SerializeField]
+        [SerializeField] [TextArea]
         private string text;
         public string Text => text;
 

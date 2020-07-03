@@ -7,7 +7,10 @@ namespace Signals.Transmitters.Unary
     public class UnaryTransmitter : Signal
     {
 
-        protected virtual void TransformSignal(Signal signal){}
+        protected virtual void TransformSignal(Signal signal)
+        {
+            ChangeSignal(signal.Signaled);
+        }
 
         internal void UpdateTransmitter(Signal signal)
         {

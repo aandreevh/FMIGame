@@ -459,6 +459,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 64dda840b60e29fe58b526933c333139, type: 2}
+    - target: {fileID: 6241938299629092646, guid: a5bef3bbbde0e479198f60d226a88e12,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7258362400287131428, guid: a5bef3bbbde0e479198f60d226a88e12,
         type: 3}
       propertyPath: levelScenes.Array.size
