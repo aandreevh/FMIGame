@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SilverKey
   m_EditorClassIdentifier: 
   image: {fileID: -5677179299027639335, guid: c51b4e45b26868a618e1c8fd33bb9846, type: 3}
-  rarity: 1
+  rarity: 0
   itemName: Silver Key

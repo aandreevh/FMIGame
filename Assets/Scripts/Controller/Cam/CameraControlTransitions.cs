@@ -31,6 +31,8 @@ namespace Controller.Cam
                 yield return null;
             }
         }
+        
+        
 
         public Transition FadeScreenTransition(float fadeTime, bool fadeOut = true)
         {

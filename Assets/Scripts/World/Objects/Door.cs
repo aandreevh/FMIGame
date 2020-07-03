@@ -10,7 +10,7 @@ namespace World.Objects
         
         [SerializeField]
         private GameObject doorObject;
-
+        
         public GameObject DoorObject => doorObject;
 
         protected override void OnSignalAcquired()

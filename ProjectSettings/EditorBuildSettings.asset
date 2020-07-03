@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AndreyTest.unity
     guid: 448feeb7deec1f4a19c9f798095cdbb7
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level2.unity
+    guid: d4b5daa484cd519daac37d41f16328da
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level1.unity
+    guid: d7e54a3ef8128e738baaff2027494903
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d48b431aeae979fba8956941ada62a4c,
       type: 2}
