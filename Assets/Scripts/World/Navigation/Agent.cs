@@ -27,7 +27,7 @@ namespace World.Navigation
         public Point TargetPoint
         {
             get => targetPoint;
-            private set => targetPoint = value;
+             set => targetPoint = value;
         }
         public Actor Actor { get; private set; }
 
