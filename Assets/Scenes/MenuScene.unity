@@ -462,13 +462,19 @@ PrefabInstance:
     - target: {fileID: 7258362400287131428, guid: a5bef3bbbde0e479198f60d226a88e12,
         type: 3}
       propertyPath: levelScenes.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7258362400287131428, guid: a5bef3bbbde0e479198f60d226a88e12,
         type: 3}
       propertyPath: levelScenes.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: 137b6f712a3483629b98e809b35f3269,
+        type: 2}
+    - target: {fileID: 7258362400287131428, guid: a5bef3bbbde0e479198f60d226a88e12,
+        type: 3}
+      propertyPath: levelScenes.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3c8e4b1930efdc7dc9a7119e60d4d0cb,
         type: 2}
     - target: {fileID: 7258362400632952088, guid: a5bef3bbbde0e479198f60d226a88e12,
         type: 3}

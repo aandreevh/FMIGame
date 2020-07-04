@@ -1272,7 +1272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   signal: {fileID: 1090440938}
   manager: {fileID: 1111729912}
-  winning: 0
+  winning: 1
   endMenu: {fileID: 583677616}
 --- !u!4 &746382400 stripped
 Transform:
