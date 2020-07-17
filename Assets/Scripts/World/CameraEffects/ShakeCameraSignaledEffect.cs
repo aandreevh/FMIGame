@@ -1,3 +1,4 @@
+using Controller.Cam.Transitions;
 using UnityEngine;
 
 namespace World.CameraEffects

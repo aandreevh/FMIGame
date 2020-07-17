@@ -1,4 +1,5 @@
 using Controller.Cam;
+using Controller.Cam.Transitions;
 using UnityEngine;
 using World.Actors;
 using World.Navigation;

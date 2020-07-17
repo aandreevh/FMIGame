@@ -1,4 +1,5 @@
 using System.Collections;
+using Controller.Cam.Transitions;
 using UnityEngine;
 
 namespace Controller.Cam
@@ -20,6 +21,10 @@ namespace Controller.Cam
         {
             Camera = GetComponent<Camera>();
             Reset();
+        }
+        public void Reset()
+        {
+            TransitionStack = this.IdentityTransition();
         }
     }
 }
