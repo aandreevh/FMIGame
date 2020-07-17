@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace UI
 {
@@ -6,12 +7,11 @@ namespace UI
     {
         public void ToggleExit()
         {
-#if UNITY_EDITOR
-        
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
+            #if UNITY_EDITOR
+                EditorApplication.isPlaying = false;
+            #else
                 Application.Quit();
-#endif
+            #endif
         }
     }
 }

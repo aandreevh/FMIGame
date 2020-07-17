@@ -7004,6 +7004,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764ad639a71940b8ab56f958d3b287b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1520366374 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3512366630671367316, guid: 0c4e56d3e6c5aa4e0871f4796c7395ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 2273653857703874921}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1520366375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520366374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7798e215cdb4fc38de3f418140df0ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signal: {fileID: 1436246214}
+  doorObject: {fileID: 2273653857703874922}
 --- !u!1001 &1583697147
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9862,6 +9882,11 @@ PrefabInstance:
       propertyPath: signal
       value: 
       objectReference: {fileID: 1436246214}
+    - target: {fileID: 2273653858834096472, guid: 0c4e56d3e6c5aa4e0871f4796c7395ac,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3512366630671367312, guid: 0c4e56d3e6c5aa4e0871f4796c7395ac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9922,8 +9947,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2273653858834096472, guid: 0c4e56d3e6c5aa4e0871f4796c7395ac, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 0c4e56d3e6c5aa4e0871f4796c7395ac, type: 3}
+--- !u!1 &2273653857703874922 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2273653858860172265, guid: 0c4e56d3e6c5aa4e0871f4796c7395ac,
+    type: 3}
+  m_PrefabInstance: {fileID: 2273653857703874921}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3401285295008181753 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3512366630671367312, guid: 0c4e56d3e6c5aa4e0871f4796c7395ac,

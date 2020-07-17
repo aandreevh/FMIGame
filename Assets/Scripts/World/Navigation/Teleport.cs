@@ -1,25 +1,21 @@
-using System;
-using System.Collections.Generic;
 using Signals.Receivers.Unary;
 using Tracker;
 using UnityEngine;
-using World.Objects;
 
 namespace World.Navigation
 {
     [RequireComponent(typeof(CollisionTracker))]
     public class Teleport : UnaryReceiver
     {
+        [SerializeField] private Point location;
+        [SerializeField] private bool teleportEnabled;
 
-        [SerializeField]
-        private bool teleportEnabled;
         public bool TeleportEnabled
         {
             get => teleportEnabled;
             set => teleportEnabled = value;
         }
 
-        [SerializeField] private Point location;
         public Vector3 TeleportLocation => location.Position;
         public CollisionTracker TeleportTracker { get; set; }
 

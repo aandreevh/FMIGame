@@ -1,32 +1,27 @@
-﻿using System.Runtime.CompilerServices;
-using Controller;
+﻿using Controller;
 using Items;
-using Signals.Emitters;
 using UnityEngine;
-using World.Actors;
 using World.Navigation;
 
 namespace World.Actors
 {
     [RequireComponent(typeof(Interactor),
         typeof(ItemPicker),
-    typeof(PlayerController))]
+        typeof(PlayerController))]
     public class Player : Actor
     {
-   
-        [Header("Player")]
-        [SerializeField]
-        private Direction lookingDirection;
+        [Header("Player")] [SerializeField] private Direction lookingDirection;
+
+        private bool walkedSynchronizer;
 
         public bool HasWalked { get; private set; }
-        private bool walked = false;
-       
+
         public Direction LookingDirection
         {
             get => lookingDirection;
             private set => lookingDirection = value;
         }
-        
+
         public Interactor Interactor { get; private set; }
 
         protected override void Awake()
@@ -38,8 +33,8 @@ namespace World.Actors
         public void Walk(Direction direction, float amount)
         {
             LookingDirection = direction;
-            walked = true;
-            Move(amount* direction.Normal());
+            walkedSynchronizer = true;
+            Move(amount * direction.Normal());
         }
 
         public void Interact()
@@ -50,12 +45,15 @@ namespace World.Actors
         protected override void UpdateMotion()
         {
             base.UpdateMotion();
-            if (HasMoved && walked)
+            if (HasMoved && walkedSynchronizer)
             {
                 HasWalked = true;
-                walked = false;
+                walkedSynchronizer = false;
             }
-            else HasWalked = false;
+            else
+            {
+                HasWalked = false;
+            }
         }
     }
 }

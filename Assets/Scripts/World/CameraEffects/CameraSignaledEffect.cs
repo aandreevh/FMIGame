@@ -1,17 +1,17 @@
 using Controller.Cam;
 using Signals.Receivers.Unary;
 using UnityEngine;
+
 namespace World.CameraEffects
 {
     public class CameraSignaledEffect : UnaryReceiver
     {
         [SerializeField] private CameraController controller;
-        protected CameraController Controller => controller;
-
+        [SerializeField] [HideInInspector] private bool hasTriggered;
         [SerializeField] private bool triggerOnce = true;
+       
+        protected CameraController Controller => controller;
         public bool TriggerOnce => triggerOnce;
-
-        [SerializeField, HideInInspector] private bool hasTriggered;
         public bool HasTriggered
         {
             get => hasTriggered;
@@ -33,12 +33,9 @@ namespace World.CameraEffects
                 }
             }
         }
-        
-        protected virtual void TriggerEffect(){}
 
-        protected override void OnSignalLost()
+        protected virtual void TriggerEffect()
         {
-            base.OnSignalLost();
         }
     }
 }

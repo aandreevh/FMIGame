@@ -8,49 +8,42 @@ namespace Global
 {
     public static class SaveManager
     {
-        private const string saveName = "/gamesave.sv";
+        private const string SaveName = "savegame.sv";
+        public static string SavePath => Application.persistentDataPath +
+                                         Path.DirectorySeparatorChar + SaveName;
         public static void CreateSaveGame(List<LevelScene> levelScenes)
         {
-            string path = Application.persistentDataPath + saveName;
-            if (!File.Exists(path))
+            using (var saveStream = OpenSaveFileStream(FileMode.Create))
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream stream = new FileStream(path, FileMode.Create);
-
-                SaveData saveData = new SaveData(levelScenes);
-                formatter.Serialize(stream, saveData);
-                stream.Close();
-            }
-        }
-
-        public static void SaveGame(List<LevelState> levelStates)
-        {
-            string path = Application.persistentDataPath + saveName;
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Create);
-            
-            SaveData saveData = new SaveData(levelStates);
-            formatter.Serialize(stream, saveData);
-            stream.Close();
-        }
-
-        public static SaveData LoadGame()
-        {
-            string path = Application.persistentDataPath + saveName;
-            if (File.Exists(path))
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-                FileStream stream = new FileStream(path, FileMode.OpenOrCreate);
-                SaveData saveData = formatter.Deserialize(stream) as SaveData;
-                stream.Close();
-
-                return saveData;
-            }
-            else
-            {
-                return null;
+                var formatter = new BinaryFormatter();
+                var saveData = new SaveData(levelScenes);
+                formatter.Serialize(saveStream,saveData);
             }
         }
         
+        public static void SaveGame(List<LevelState> levelStates)
+        {
+            using (var saveStream = OpenSaveFileStream(FileMode.Create))
+            {
+                var formatter = new BinaryFormatter();
+                var saveData = new SaveData(levelStates);
+                formatter.Serialize(saveStream, saveData);   
+            }
+        }
+        
+        public static SaveData LoadGame()
+        {
+            using (var saveStream = OpenSaveFileStream(FileMode.OpenOrCreate))
+            {
+                var formatter = new BinaryFormatter();
+                return formatter.Deserialize(saveStream) as SaveData;
+            }
+        }
+
+        private static FileStream OpenSaveFileStream(FileMode mode)
+        {
+            var stream = new FileStream(SavePath, mode);
+            return stream;
+        }
     }
 }

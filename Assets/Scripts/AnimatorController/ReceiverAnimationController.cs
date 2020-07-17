@@ -5,10 +5,10 @@ namespace AnimatorController
 {
     public class ReceiverAnimationController : StateMachineBehaviour
     {
-        public const string TriggeredParam = "triggered";
-        
+        [SerializeField] private string signalParam = "triggered";
+
         private UnaryReceiver Receiver { get; set; }
-        private static readonly int Triggered = Animator.StringToHash(TriggeredParam);
+        private int SignaledKey => Animator.StringToHash(signalParam);
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
@@ -16,12 +16,8 @@ namespace AnimatorController
         }
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        {  
-            if (Receiver && Receiver.Signal)
-            {
-             
-                animator.SetBool(Triggered, Receiver.Signal.Signaled);
-            }
+        {
+            if (Receiver && Receiver.Signal) animator.SetBool(SignaledKey, Receiver.Signal.Signaled);
         }
     }
 }

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 namespace Controller.Cam
 {
@@ -10,20 +10,16 @@ namespace Controller.Cam
 
     public partial class CameraController
     {
-
         public Transition IdentityTransition(Func<bool> condition = null)
         {
             condition = condition ?? (() => { return true; });
-            while (condition())
-            {
-                yield return null;
-            }
+            while (condition()) yield return null;
         }
 
         public Transition FollowTransition(Transform target, Func<bool> condition = null)
         {
             condition = condition ?? (() => { return true; });
-           
+
             var transformComponent = transform;
             while (condition())
             {
@@ -31,13 +27,11 @@ namespace Controller.Cam
                 yield return null;
             }
         }
-        
-        
+
 
         public Transition FadeScreenTransition(float fadeTime, bool fadeOut = true)
         {
-
-            GameObject fadeObject = CreateFadeObject();
+            var fadeObject = CreateFadeObject();
             var texture = fadeObject.GetComponent<RawImage>().texture as Texture2D;
 
 
@@ -65,17 +59,17 @@ namespace Controller.Cam
 
         private GameObject CreateFadeObject()
         {
-            var currentTransform = this.transform;
+            var currentTransform = transform;
 
-            GameObject fader = new GameObject();
+            var fader = new GameObject();
             fader.transform.position = currentTransform.position + Vector3.forward;
             fader.transform.parent = currentTransform;
 
-            RawImage img = fader.AddComponent<RawImage>();
+            var img = fader.AddComponent<RawImage>();
             var canvas = fader.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceCamera;
 
-            Texture2D texture = new Texture2D(1, 1);
+            var texture = new Texture2D(1, 1);
 
             var rectTransform = img.rectTransform;
             texture.SetPixel(0, 0, new Color(0, 0, 0, 0));
@@ -90,58 +84,58 @@ namespace Controller.Cam
 
         public Transition WaitTransition(float timeout)
         {
-            float time = timeout;
+            var time = timeout;
             while (true)
             {
                 time -= Time.deltaTime;
-                if(time <=0) yield break;
+                if (time <= 0) yield break;
 
                 yield return null;
             }
         }
 
-        public Transition SmoothGoToTransition(Vector2 target,float speed)
+        public Transition SmoothGoToTransition(Vector2 target, float speed)
         {
             var transformComponent = transform;
             while (true)
             {
                 var deltaSpeed = speed * Time.deltaTime;
-                var position = (Vector2)transform.position;
+                var position = (Vector2) transform.position;
 
-                if (Vector2.Distance(target,position) < deltaSpeed)
+                if (Vector2.Distance(target, position) < deltaSpeed)
                 {
-                    transformComponent.position = new Vector3(target.x,target.y, transformComponent.position.z);
+                    transformComponent.position = new Vector3(target.x, target.y, transformComponent.position.z);
                     yield break;
                 }
-                
+
                 var direction = (target - position).normalized;
                 var deltaMovement = direction * deltaSpeed;
-                
-                transformComponent.position = new Vector3(position.x +deltaMovement.x,
+
+                transformComponent.position = new Vector3(position.x + deltaMovement.x,
                     position.y + deltaMovement.y,
                     transformComponent.position.z);
                 yield return null;
-            }   
+            }
         }
 
-        public Transition ShakeScreenTransition(float amount,float time,bool autoRevert=false)
+        public Transition ShakeScreenTransition(float amount, float time, bool autoRevert = false)
         {
             var lastTransition = Vector3.zero;
             var cameraTansform = Camera.transform;
-            
+
             while (true)
             {
                 time -= Time.deltaTime;
-                
+
                 var position = cameraTansform.position;
-                if(autoRevert) position -= lastTransition;
-                
-                lastTransition = (Vector3) UnityEngine.Random.insideUnitCircle * amount;
-                
+                if (autoRevert) position -= lastTransition;
+
+                lastTransition = (Vector3) Random.insideUnitCircle * amount;
+
                 position += lastTransition;
                 cameraTansform.position = position;
                 if (time <= 0) yield break;
-                
+
                 yield return null;
             }
         }
@@ -150,7 +144,5 @@ namespace Controller.Cam
         {
             TransitionStack = IdentityTransition();
         }
-
-
     }
 }

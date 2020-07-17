@@ -1,13 +1,11 @@
-using System;
 using Signals.Receivers.Unary;
-using UnityEngine;
 
 namespace Signals.Transmitters.Unary
 {
     public class UnaryTransmitterReceiver : UnaryReceiver
     {
-        
         private UnaryTransmitter Transmitter { get; set; }
+
         protected void Awake()
         {
             Transmitter = GetComponent<UnaryTransmitter>();

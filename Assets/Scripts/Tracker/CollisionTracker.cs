@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
 
@@ -8,38 +7,39 @@ namespace Tracker
 {
     [RequireComponent(typeof(Collider2D),
         typeof(Rigidbody2D))]
-    public class CollisionTracker : MonoBehaviour 
+    public class CollisionTracker : MonoBehaviour
     {
-
         public enum AccessPolicyType
         {
-            Access,Deny
+            Access,
+            Deny
         }
 
-        [SerializeField] private bool fromCollisions=true;
+        [SerializeField] private bool fromCollisions = true;
         [SerializeField] private bool fromTriggers = true;
-        
-        [Header("Layers")]
-        [SerializeField] private List<LayerMask> layerAccessList;
+
+        [Header("Layers")] [SerializeField] private List<LayerMask> layerAccessList;
+
         [SerializeField] private AccessPolicyType layerPolicy = AccessPolicyType.Deny;
-        
-        [Header("Tags")]
-        [SerializeField] private List<string> tagAccesList;
+
+        [Header("Tags")] [SerializeField] private List<string> tagAccesList;
+
         [SerializeField] private AccessPolicyType tagPolicy = AccessPolicyType.Deny;
-        
+
         public bool FromCollisions => fromCollisions;
         public bool FromTriggers => fromTriggers;
-        
+
         public List<LayerMask> LayerAccessList => layerAccessList;
         public AccessPolicyType LayerPolicy => layerPolicy;
-        
+
         public List<string> TagAccessList => tagAccesList;
         public AccessPolicyType TagPolicy => tagPolicy;
 
         public HashSet<Collider2D> Colliders { get; } = new HashSet<Collider2D>();
-        
+
         public event Action<Collider2D> OnColliderEnter;
         public event Action<Collider2D> OnColliderExit;
+
         protected void OnTriggerEnter2D(Collider2D other)
         {
             if (FromTriggers && QualifyAccess(other))
@@ -47,7 +47,6 @@ namespace Tracker
                 Colliders.Add(other);
                 OnColliderEnter?.Invoke(other);
             }
-          
         }
 
         protected void OnTriggerExit2D(Collider2D other)
@@ -57,7 +56,6 @@ namespace Tracker
                 Colliders.Remove(other);
                 OnColliderExit?.Invoke(other);
             }
-        
         }
 
         protected void OnCollisionEnter2D(Collision2D collision)
@@ -68,11 +66,10 @@ namespace Tracker
                 Colliders.Add(other);
                 OnColliderEnter?.Invoke(other);
             }
-           
         }
 
         protected void OnCollisionExit2D(Collision2D collision)
-        { 
+        {
             var other = collision.collider;
 
             if (Colliders.Contains(other))
@@ -82,29 +79,31 @@ namespace Tracker
             }
         }
 
-        private bool QualifyAccess(Collider2D collider)
+        private bool QualifyAccess(Collider2D targetCollider)
         {
-            return QualifyLayers(collider) && QualifyTags(collider);
+            return QualifyLayers(targetCollider) && QualifyTags(targetCollider);
         }
 
-        private bool QualifyLayers(Collider2D collider)
+        private bool QualifyLayers(Collider2D targetCollider)
         {
-            bool hasAccess = LayerPolicy == AccessPolicyType.Access;
+            var hasAccess = LayerPolicy == AccessPolicyType.Access;
             foreach (var mask in LayerAccessList)
-            {
-                if (mask == (mask | (1 << collider.gameObject.layer))) return hasAccess;
-            }
+                if (TargetHasMask(mask,targetCollider)) return hasAccess;
 
             return !hasAccess;
         }
 
-        private bool QualifyTags(Collider2D collider)
+        private bool TargetHasMask(LayerMask mask, Collider2D targetCollider)
         {
-            bool hasAccess = TagPolicy == AccessPolicyType.Access;
+            return mask == (mask | (1 << targetCollider.gameObject.layer));
+        }
+
+        private bool QualifyTags(Collider2D targetCollider)
+        {
+            var hasAccess = TagPolicy == AccessPolicyType.Access;
             foreach (var tg in TagAccessList)
-            {
-                if (collider.gameObject.CompareTag(tg)) return hasAccess;
-            }
+                if (targetCollider.gameObject.CompareTag(tg))
+                    return hasAccess;
             return !hasAccess;
         }
 
@@ -113,6 +112,5 @@ namespace Tracker
             return Colliders.Select(e => e.GetComponent<T>())
                 .Where(e => e);
         }
-
     }
 }

@@ -6,19 +6,25 @@ namespace Signals.Receivers.Binary
     {
         public enum SignalType
         {
-            Left,Right
+            Left,
+            Right
         }
 
-        [Header("Receiver")]
-        [SerializeField] private Signal left;
+        [Header("Receiver")] [SerializeField] private Signal left;
+
         [SerializeField] private Signal right;
 
         public Signal LeftSignal => left;
         public Signal RightSignal => right;
-        
-        protected virtual void OnSignalAcquired(SignalType type){}
-        protected virtual void OnSignalLost(SignalType type){}
-        
+
+        protected virtual void OnSignalAcquired(SignalType type)
+        {
+        }
+
+        protected virtual void OnSignalLost(SignalType type)
+        {
+        }
+
         private void OnEnable()
         {
             AddHooks();
@@ -31,14 +37,14 @@ namespace Signals.Receivers.Binary
 
         private void AddHooks()
         {
-            if(LeftSignal) LeftSignal.OnSignalChangedEvent += SignalChangedLeftHook;
-            if(RightSignal ) RightSignal.OnSignalChangedEvent += SignalChangedRightHook;
+            if (LeftSignal) LeftSignal.OnSignalChangedEvent += SignalChangedLeftHook;
+            if (RightSignal) RightSignal.OnSignalChangedEvent += SignalChangedRightHook;
         }
 
         private void RemoveHooks()
         {
-            if(LeftSignal)LeftSignal.OnSignalChangedEvent -= SignalChangedLeftHook;
-            if(RightSignal)RightSignal.OnSignalChangedEvent -= SignalChangedRightHook;
+            if (LeftSignal) LeftSignal.OnSignalChangedEvent -= SignalChangedLeftHook;
+            if (RightSignal) RightSignal.OnSignalChangedEvent -= SignalChangedRightHook;
         }
 
         private void SignalChangedLeftHook()
@@ -49,13 +55,14 @@ namespace Signals.Receivers.Binary
             else OnSignalLost(SignalType.Left);
         }
 
-            private void SignalChangedRightHook()
-            {
-                if (!RightSignal) return;
-                if (RightSignal.Signaled)
-                    OnSignalAcquired(SignalType.Right);
-                else OnSignalLost(SignalType.Right);
-            }
+        private void SignalChangedRightHook()
+        {
+            if (!RightSignal) return;
+            if (RightSignal.Signaled)
+                OnSignalAcquired(SignalType.Right);
+            else OnSignalLost(SignalType.Right);
+        }
+
         protected virtual void OnDrawGizmos()
         {
             const float pointRadius = 0.2f;
@@ -64,16 +71,16 @@ namespace Signals.Receivers.Binary
             {
                 Gizmos.color = LeftSignal.Signaled ? Color.green : Color.red;
                 var signalPosition = LeftSignal.transform.position;
-                Gizmos.DrawLine(signalPosition,position);
-                Gizmos.DrawSphere(signalPosition,pointRadius);
+                Gizmos.DrawLine(signalPosition, position);
+                Gizmos.DrawSphere(signalPosition, pointRadius);
             }
-            
+
             if (RightSignal)
             {
                 var signalPosition = RightSignal.transform.position;
                 Gizmos.color = RightSignal.Signaled ? Color.green : Color.red;
-                Gizmos.DrawLine(signalPosition,position);
-                Gizmos.DrawSphere(signalPosition,pointRadius);
+                Gizmos.DrawLine(signalPosition, position);
+                Gizmos.DrawSphere(signalPosition, pointRadius);
             }
         }
     }

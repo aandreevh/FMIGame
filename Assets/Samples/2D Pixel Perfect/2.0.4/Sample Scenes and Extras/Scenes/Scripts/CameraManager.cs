@@ -1,15 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.U2D;
 
 public class CameraManager : MonoBehaviour
 {
+    private bool isPixelPerfect;
     public Camera ordinaryCamera;
     public PixelPerfectCamera pixelPerfectCamera;
 
-    private bool isPixelPerfect;
-
-    void Awake()
+    private void Awake()
     {
         isPixelPerfect = false;
         ValidateCameras(isPixelPerfect);

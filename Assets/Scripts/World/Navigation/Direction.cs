@@ -4,7 +4,10 @@ namespace World.Navigation
 {
     public enum Direction
     {
-        Up=0,Down=1,Right=2,Left=3
+        Up = 0,
+        Down = 1,
+        Right = 2,
+        Left = 3
     }
 
     public static class DirectionMethods
@@ -31,17 +34,16 @@ namespace World.Navigation
             switch (type)
             {
                 case Direction.Up:
-                    return Quaternion.Euler(new Vector3(0,0,0));
+                    return Quaternion.Euler(new Vector3(0, 0, 0));
                 case Direction.Down:
-                    return Quaternion.Euler(new Vector3(0,0,180));
+                    return Quaternion.Euler(new Vector3(0, 0, 180));
                 case Direction.Left:
-                    return Quaternion.Euler(new Vector3(0,0,90));
+                    return Quaternion.Euler(new Vector3(0, 0, 90));
                 case Direction.Right:
-                    return Quaternion.Euler(new Vector3(0,0,-90));
+                    return Quaternion.Euler(new Vector3(0, 0, -90));
                 default:
-                    return Quaternion.Euler(new Vector3(0,0,0));
+                    return Quaternion.Euler(new Vector3(0, 0, 0));
             }
         }
     }
-  
 }

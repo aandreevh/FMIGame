@@ -2,20 +2,17 @@ using UnityEngine;
 
 namespace Items
 {
-    [CreateAssetMenu(fileName = "NewItem", menuName = "Item")]
+    [CreateAssetMenu(fileName = "New Item", menuName = "Item")]
     public class Item : ScriptableObject
     {
-        [SerializeField]
-        private Sprite image;
-        public Sprite Image => image;
-
-        [SerializeField] private ItemRarity rarity;
-        public ItemRarity Rarity => rarity;
+        [SerializeField] private Sprite image;
 
         [SerializeField] private string itemName;
+
+        [SerializeField] private ItemRarity rarity;
+        public Sprite Image => image;
+        public ItemRarity Rarity => rarity;
         public string Name => itemName;
-
-        public string DecoratedName => string.Format("<b><color={0}>{1}</color></b>",Rarity.GetColor(),Name);
-
+        public string DecoratedName => $"<b><color={Rarity.GetColor()}>{Name}</color></b>";
     }
 }

@@ -1,10 +1,19 @@
+using System;
+using UnityEngine;
+
 namespace Global.Level
 {
-    [System.Serializable]
+    [Serializable]
     public class LevelState
     {
-        private string levelName;
-        private bool isAvailable;
+        [SerializeField] private bool isAvailable;
+        [SerializeField] private string levelName;
+
+        public LevelState(string levelName, bool isAvailable)
+        {
+            LevelName = levelName;
+            IsAvailable = isAvailable;
+        }
 
         public string LevelName
         {
@@ -16,12 +25,6 @@ namespace Global.Level
         {
             get => isAvailable;
             set => isAvailable = value;
-        }
-
-        public LevelState(string levelName, bool isAvailable)
-        {
-            this.LevelName = levelName;
-            this.IsAvailable = isAvailable;
         }
     }
 }

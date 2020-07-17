@@ -1,15 +1,16 @@
 using System.Collections;
 using UnityEngine;
 using static Controller.Cam.CameraController;
+
 namespace World.CameraEffects
 {
     public class FadeAndShowCameraSignaledEffect : CameraSignaledEffect
     {
-        [SerializeField] private Transform target;
         [SerializeField] private Transform back;
-        [SerializeField] private float timeoutFade=1f;
-        [SerializeField] private float timeoutShow=1f;
-            
+        [SerializeField] private Transform target;
+        [SerializeField] private float timeoutFade = 1f;
+        [SerializeField] private float timeoutShow = 1f;
+
         protected override void TriggerEffect()
         {
             Controller.AddSyncBefore(CreateEffect());
@@ -17,8 +18,8 @@ namespace World.CameraEffects
 
         private IEnumerator CreateEffect()
         {
-            return CombineSync(FadeAndShow(target), 
-                CombineSync(Controller.WaitTransition(timeoutShow),FadeAndShow(back)));
+            return CombineSync(FadeAndShow(target),
+                CombineSync(Controller.WaitTransition(timeoutShow), FadeAndShow(back)));
         }
 
         private IEnumerator FadeAndShow(Transform s)

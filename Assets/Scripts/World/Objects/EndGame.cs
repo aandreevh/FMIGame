@@ -1,4 +1,3 @@
-using System;
 using Global.Level;
 using Signals.Receivers.Unary;
 using Tracker;
@@ -9,16 +8,13 @@ namespace World.Objects
     [RequireComponent(typeof(CollisionTracker))]
     public class EndGame : UnaryReceiver
     {
+        [SerializeField] private GameObject endMenu;
+        [SerializeField] private LevelManager manager;
+        [SerializeField] private bool winning;
 
         private CollisionTracker Tracker { get; set; }
-
-        [SerializeField] private LevelManager manager;
         private LevelManager Manager => manager;
-
-        [SerializeField] private bool winning;
         public bool Winning => winning;
-
-        [SerializeField] private GameObject endMenu;
         private GameObject EndMenu => endMenu;
 
         protected override void OnSignalAcquired()
@@ -41,10 +37,7 @@ namespace World.Objects
             if (Signal.Signaled)
             {
                 Time.timeScale = 0;
-                if (Winning)
-                {
-                    Manager.LevelPassed();
-                }
+                if (Winning) Manager.LevelPassed();
                 EndMenu.SetActive(true);
             }
         }

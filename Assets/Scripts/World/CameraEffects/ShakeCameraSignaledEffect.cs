@@ -4,9 +4,8 @@ namespace World.CameraEffects
 {
     public class ShakeCameraSignaledEffect : CameraSignaledEffect
     {
-        [Header("Shake params")]
-        [SerializeField] private float shakeTime;
         [SerializeField] private float shakeAmount;
+        [Header("Shake params")] [SerializeField] private float shakeTime;
 
         protected override void TriggerEffect()
         {

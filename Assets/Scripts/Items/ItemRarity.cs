@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Items
 {
     public enum ItemRarity
@@ -7,9 +5,8 @@ namespace Items
         Common,
         Rare,
         Artefact
-        
     }
-
+    
     public static class ItemRarityMethods
     {
         public static string GetColor(this ItemRarity rarity)

@@ -5,27 +5,28 @@ namespace Signals.Emitters
 {
     public class TimedSignal : Signal
     {
-
         [SerializeField] private float timeActivated;
         [SerializeField] private float timeDeactivated;
         [SerializeField] private float timeout;
+       
         public float TimeActivated => timeActivated;
         public float TimeDeactivated => timeDeactivated;
+
         public float Timeout
         {
             get => timeout;
             private set => timeout = value;
         }
-        
+
         protected override void Start()
         {
             base.Start();
             StartCoroutine(nameof(TimeUpdate));
         }
+
         private IEnumerator TimeUpdate()
         {
-            bool lastState = Signaled;
-            
+            var lastState = Signaled;
             
             while (true)
             {
@@ -34,14 +35,16 @@ namespace Signals.Emitters
                     SetTimeout();
                     lastState = Signaled;
                 }
+
                 UpdateTimeout();
                 yield return null;
             }
-        }
+        } //Timer is runs until destroyed
 
         private void UpdateTimeout()
         {
             Timeout -= Time.deltaTime;
+            
             if (Timeout <= 0)
             {
                 ChangeSignal(!Signaled);

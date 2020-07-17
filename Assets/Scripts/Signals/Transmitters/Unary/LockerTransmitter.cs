@@ -5,20 +5,19 @@ namespace Signals.Transmitters.Unary
 {
     public class LockerTransmitter : UnaryTransmitter
     {
-
+        [SerializeField] private float timeout;
         [SerializeField] private bool unlockable;
         [SerializeField] private float unlockTimeout;
-        [SerializeField] private float timeout;
+      
         public bool IsUnlockable => unlockable;
         public float UnlockTimeout => unlockTimeout;
-
         public float Timeout
         {
             get => timeout;
             private set => timeout = value;
         }
 
-        protected virtual void Start()
+        protected override void Start()
         {
             StartUnlocking();
         }
@@ -27,8 +26,9 @@ namespace Signals.Transmitters.Unary
         {
             if (Signaled & !signal.Signaled)
             {
-             StartUnlocking();
-            }else if (signal.Signaled)
+                StartUnlocking();
+            }
+            else if (signal.Signaled)
             {
                 ChangeSignal(true);
                 StopUnlocking();
@@ -48,7 +48,7 @@ namespace Signals.Transmitters.Unary
         private IEnumerator UnlockCoroutine()
         {
             Timeout = UnlockTimeout;
-            
+
             while (true)
             {
                 Timeout -= Time.deltaTime;

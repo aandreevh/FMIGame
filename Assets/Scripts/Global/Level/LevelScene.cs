@@ -6,17 +6,10 @@ namespace Global.Level
     [CreateAssetMenu(fileName = "LevelScene", menuName = "ScriptableObjects/LevelScene", order = 1)]
     public class LevelScene : ScriptableObject
     {
-        public SceneAsset scene;
-        public int level;
-        public SceneAsset Scene
-        {
-            get => scene;
-        }
+        [SerializeField] private int level;
+        [SerializeField] private SceneAsset scene;
 
-        public int Level
-        {
-            get => level;
-        }
-        
+        public SceneAsset Scene => scene;
+        public int Level => level;
     }
 }

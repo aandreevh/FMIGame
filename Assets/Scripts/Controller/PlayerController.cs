@@ -1,26 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Controller.Cam;
-using UnityEditor;
 using UnityEngine;
 using World.Actors;
 using World.Navigation;
-using static Controller.Cam.CameraController;
+
 namespace Controller
 {
     [RequireComponent(typeof(Player))]
     public class PlayerController : MonoBehaviour
     {
-        
-        [SerializeField]
-        private float speed = 1f;
-        public float Speed => speed*Time.deltaTime;
-
         [SerializeField] private CameraController cameraController;
-        public CameraController CameraController => cameraController;
-
         [SerializeField] private Transform lighting;
+        [SerializeField] private float speed = 1f;
+
+        public float Speed => speed * Time.deltaTime;
+        public CameraController CameraController => cameraController;
         public Transform Lighting => lighting;
 
         private Player Player { get; set; }
@@ -34,15 +27,12 @@ namespace Controller
 
         private void Start()
         {
-
-            CameraController
-                .AddSyncBefore(CameraController.FollowTransition(transform));
+            CameraFollow();
         }
 
-        private IEnumerator WaitAndFade()
+        private void CameraFollow()
         {
-            return CombineSync(CameraController.WaitTransition(1),
-                CameraController.FadeScreenTransition(10));
+            CameraController.AddSyncBefore(CameraController.FollowTransition(transform));
         }
 
         private void FixedUpdate()
@@ -53,30 +43,34 @@ namespace Controller
         private void HandleInput()
         {
             HandleWalk();
-            HandeLighting();
+            HandleLighting();
             HandleInteraction();
         }
 
-        private void HandeLighting()
-        { 
-            var mousePosition = Input.mousePosition;
-           var diff=  CameraController.Camera.ScreenToWorldPoint(mousePosition) - Lighting.position;
+        private void HandleLighting()
+        {
+            LookAtMouse(Lighting);
+        }
 
-           float rot = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg-90;
-           Lighting.rotation = Quaternion.Euler(Vector3.forward * rot);
+        private void LookAtMouse(Transform target, float rotationOffset = 90)
+        {
+            var diff = CameraController.Camera.ScreenToWorldPoint(Input.mousePosition) - target.position;
+
+            var rot = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg - rotationOffset;
+            target.rotation = Quaternion.Euler(Vector3.forward * rot);
         }
 
         private void HandleWalk()
         {
-            if(Input.GetKey(KeyCode.W)) MoveControl(Direction.Up);
-            else if(Input.GetKey(KeyCode.S))MoveControl(Direction.Down);
-            else if(Input.GetKey(KeyCode.A))MoveControl(Direction.Left);
-            else if(Input.GetKey(KeyCode.D))MoveControl(Direction.Right);
+            if (Input.GetKey(KeyCode.W)) MoveControl(Direction.Up);
+            else if (Input.GetKey(KeyCode.S)) MoveControl(Direction.Down);
+            else if (Input.GetKey(KeyCode.A)) MoveControl(Direction.Left);
+            else if (Input.GetKey(KeyCode.D)) MoveControl(Direction.Right);
         }
 
         private void HandleInteraction()
         {
-            if(Input.GetKey(KeyCode.Space)) InteractControl();
+            if (Input.GetKey(KeyCode.Space)) InteractControl();
         }
 
         private void InteractControl()
@@ -86,8 +80,7 @@ namespace Controller
 
         private void MoveControl(Direction direction)
         {
-            Player.Walk(direction,Speed);
+            Player.Walk(direction, Speed);
         }
-        
     }
 }

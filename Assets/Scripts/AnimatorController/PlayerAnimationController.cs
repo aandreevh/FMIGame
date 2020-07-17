@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
 using World.Actors;
 using World.Navigation;
-using World.Objects;
 
 namespace AnimatorController
 {
     public class PlayerAnimationController : StateMachineBehaviour
     {
-        public  const string HorizontalParam = "horizontal";
-        public  const string VerticalParam = "vertical";
-        public  const string MovingParam = "moving";
-    
-        private static readonly int Horizontal = Animator.StringToHash(HorizontalParam);
-        private static readonly int Vertical = Animator.StringToHash(VerticalParam);
-        private static readonly int Moving = Animator.StringToHash(MovingParam);
+        [SerializeField] private string horizontalParam = "horizontal";
+        [SerializeField] private string movingParam = "moving";
+        [SerializeField] private string verticalParam = "vertical";
+
+        private int HorizontalKey => Animator.StringToHash(horizontalParam);
+        private int VerticalKey => Animator.StringToHash(verticalParam);
+        private int MovingKey => Animator.StringToHash(movingParam);
         private Player Player { get; set; }
+
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             Player = animator.GetComponent<Player>();
@@ -23,16 +23,11 @@ namespace AnimatorController
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             if (Player == null) return;
-            var normal = GetDirectionNormal();
-            animator.SetFloat(Horizontal,normal.x);
-            animator.SetFloat(Vertical,normal.y);
-            animator.SetBool(Moving,Player.HasWalked);
-        }
 
-        private Vector2 GetDirectionNormal()
-        {
-            return Player.LookingDirection.Normal();
+            var normal = Player.LookingDirection.Normal();
+            animator.SetFloat(HorizontalKey, normal.x);
+            animator.SetFloat(VerticalKey, normal.y);
+            animator.SetBool(MovingKey, Player.HasWalked);
         }
-
     }
 }

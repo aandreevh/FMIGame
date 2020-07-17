@@ -6,8 +6,9 @@ namespace World.Objects.Traps
 {
     public class Dispenser : UnaryReceiver
     {
-        [SerializeField] private Point spawnPoint;
         [SerializeField] private GameObject spawnObject;
+        [SerializeField] private Point spawnPoint;
+
         protected override void OnSignalAcquired()
         {
             var obj = Instantiate(spawnObject);

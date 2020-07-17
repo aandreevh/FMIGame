@@ -14,6 +14,7 @@ namespace World.Objects
     {
         private CollisionTracker Tracker { get; set; }
         private Agent Agent { get; set; }
+
         protected void Awake()
         {
             Tracker = GetComponent<CollisionTracker>();
@@ -41,10 +42,7 @@ namespace World.Objects
 
         private void UpdateAllActorsMovement(Vector2 movement)
         {
-            foreach (var actor in Tracker.GetAsComponents<Actor>())
-            {
-                actor.Move(movement);
-            }
+            foreach (var actor in Tracker.GetAsComponents<Actor>()) actor.Move(movement);
         }
     }
 }
